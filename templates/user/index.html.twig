@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}La boutique Française - Compte{% endblock %}
+
+{% block body %}
+
+    {% for successPasswordReset in app.flashes('successPasswordReset') %}
+        <div class="alert alert-success">{{ successPasswordReset }} </div>
+    {% endfor %}
+
+    <div class="container">
+        <h1>Mon compte</h1>
+        <h2>Bienvenue {{ app.user.firstname }}</h2>
+        <br><hr><br>
+        <a href="{{ path('user_updatePassword') }}">Modifier mot de passe</a><br>
+        <a href="{{ path('user_address') }}">Gérer mes adresses</a><br>
+        <a href="{{ path('user_order') }}">Gérer mes commandes</a><br>
+    </div>
+
+    <hr class="separator">
+
+{% endblock %}

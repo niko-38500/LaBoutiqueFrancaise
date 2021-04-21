@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mot de passe oublié - La boutique Française{% endblock %}
+
+{% block body %}
+    {% for flashError in app.flashes('reset_password_error') %}
+        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+    {% endfor %}
+    <div class="container">
+        <h1>Mot de passe oublier</h1>
+        <hr>
+    
+        {{ form_start(requestForm) }}
+            {{ form_row(requestForm.email) }}
+            <div>
+                <small>
+                    Entrez votre addresse email pour recevoir le lien de modification
+                </small>
+            </div>
+    
+            <button class="btn btn-primary">valider</button>
+        {{ form_end(requestForm) }}
+    </div>
+{% endblock %}

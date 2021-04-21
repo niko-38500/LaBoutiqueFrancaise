@@ -1,0 +1,8 @@
+<h1>Reinitialisation de votre mot de passe</h1>
+
+<p>Vous avez demander a reinitialiser votre mot de passe, vous pouvez cliquez sur le lien ci-dessous pour continué</p>
+<p>Si vous n'avez pas fait de demande de mot de passe oublié vous pouvez ignoré ce mail</p>
+
+<a href="{{ url('app_reset_password', {token: resetToken.token}) }}">reinitialiser votre mot de passe</a>
+
+<p>Ce lien expire dans 1 heure</p>

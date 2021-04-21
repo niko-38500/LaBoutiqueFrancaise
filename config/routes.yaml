@@ -1,0 +1,8 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+
+secure:
+  path: /secure
+  controller: App\Controller\HomeController::secure
+  schemes: [https]

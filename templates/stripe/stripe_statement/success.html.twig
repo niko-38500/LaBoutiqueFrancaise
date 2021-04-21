@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}commande effectué - La boutique Française{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Merci pour votre commande</h1>
+    <h4>Elle vous sera expedier dans les plus bref delais</h4>
+    <p>vous allez recevoir un mail de confirmation contenant les details de votre commande. Merci et a bientot sur la boutique Française </p>
+    <p>vous pouvez suivre l'avancement de votre commande sur <a href="{{ path('user_account') }}">votre compte</a></p>
+    <br><hr><br>
+    <strong>Une nouvelle page plus jolie viendra bientôt remplacer celle-ci</strong>
+</div>
+
+{% endblock %}

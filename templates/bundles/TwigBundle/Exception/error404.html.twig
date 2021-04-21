@@ -1,0 +1,11 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Not found - La boutique Française{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>404 Not found</h1>
+        <p>La page que vous avez demander n'est pas accessible</p>
+        <p><a href="{{ path('home') }}">Revenir a l'acceuil</a></p>
+    </div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Catalogue - La boutique Française{% endblock %}
+
+{% block body %}
+
+    <div class="test">
+        <div class="filter-container">
+            <div class="product-filter">
+                <h3>Filtre</h3>
+                <p>{{ form(form) }}</p>
+            </div>
+        </div>
+        <div class="products-container">
+            <h1>Nos produits</h1>
+
+            <hr>
+
+            <div class="test2">
+                {% for product in products %}
+                    <div class="product-item">
+                        <a href="{{ path('product', { 'slug' : product.slug }) }}" class='product-link'>
+                            <div class="text-center">
+                                <h5>{{ product.name }}</h5>
+                                <img src='/uploads/{{ product.illustration }}' alt="{{ product.name }}" class="img-fluid">
+                                
+                                <span class="product-price">{{ (product.price / 100)|number_format(2, ',', ' ') }} €</span>    
+                                <span class="product-subtitle">{{ product.subtitle }}</span>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+        
+    <hr class="separator">
+
+{% endblock %}

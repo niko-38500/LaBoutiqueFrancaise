@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Adresse - La boutique Française{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    {% for flash in app.flashes('success') %}
+        <div class="alert alert-success">{{ flash }}</div>
+    {% endfor %}
+    <h1>Mes adresses :</h1>
+    <h5><a href="{{ path("user_account") }}">retour</a></h5>
+    <hr>
+    <div class="address-container">
+        <a href="{{ path("user_add_address") }}">
+            <div class="new-address">
+                <div class="new-address-content">
+                    <img src="{{ asset("img/plus-address.png") }}" alt="add-address">
+                    <p>Ajouter une addresse</p>
+                </div>
+            </div>
+        </a>
+        
+        {% for address in app.user.addresses %}
+            <div class="addresses">
+                <h5>{{ address.name }}</h5>
+                {{ address.lastname }} {{ address.firstname }} <br>
+                {{ address.address }},<br>
+                {{ address.postal }} - {{ address.city }} - {{ address.country }} <br>
+                {{ address.phone }} <br>
+                <span class="address-action">
+                    <a href="{{ path('user_delete_address', { 'id' : address.id }) }}">Supprimer</a> -
+                    <a href="{{ path('user_edit_address', { 'id' : address.id }) }}">Modifié</a>
+                </span>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<hr class="separator">
+
+{% endblock %}

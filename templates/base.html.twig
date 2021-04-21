@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="fr">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="Boutique qui vend uniquement du Made in France cocorico">
+        <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+        <meta name="generator" content="Jekyll v4.1.1">
+        <title>{% block title %}La boutique Française{% endblock %}</title>
+
+        <!-- Bootstrap core CSS -->
+        <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('css/mainStyle.css') }}">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
+
+        {% block javascript %}{% endblock %}
+
+        <style>
+            .bd-placeholder-img {
+                font-size: 1.125rem;
+                text-anchor: middle;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+            }
+
+            @media (min-width: 768px) {
+                .bd-placeholder-img-lg {
+                    font-size: 3.5rem;
+                }
+            }
+        </style>
+        <!-- Custom styles for this template -->
+        <link href="{{ asset('css/carousel.css')}}" rel="stylesheet">
+    </head>
+
+    <body>
+        <header>
+            <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+                <a class="navbar-brand" href="{{ path('home') }}">La boutique Française</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('products') }}">Nos produits</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Qui sommes-nous</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('contact') }}">Contact</a>
+                        </li>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('admin') }}">Espace administration</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                    <div class="navbar-item-custom">
+                        {% if app.user %}
+                            <a href="{{ path('user_account') }}">Mon compte <small>({{ app.user.firstname }})</small></a> | <a href="{{ path('app_logout') }}">Déconnexion</a> 
+                        {% else %}
+                        <ul class="user-log">
+                            <li>
+                                <img src="{{ asset('img/user.png') }}" alt="user-login">
+                                <ul class="sous-menu">
+                                    <li>
+                                        <a href="{{ path('app_login') }}">Connexion</a>
+                                    </li>
+                                    <hr>
+                                    <li>
+                                        <a href="{{ path('app_register') }}">Inscription</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                            
+                            
+                        {% endif %}
+                    </div>
+                </div>
+                <a href="{{ path('cart') }}"><img class="cart-icon" src="{{ asset("img/shopping-cart.png") }}" alt="shopping-cart"></a>
+            </nav>
+        </header>
+        
+        {% for flash in app.flashes('success') %}
+            <div class="alert alert-info">{{ flash }}</div>
+        {% endfor %}
+        <main role="main">
+
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                {% block carousel %}{% endblock %}
+            </div>
+
+
+            <!-- Marketing messaging and featurettes
+        ================================================== -->
+            <!-- Wrap the rest of the page in another container to center all the content. -->
+
+            <div class="marketing">
+                {% block body %}{% endblock %}
+            </div>
+
+            <!-- FOOTER -->
+            <footer class="footer_custom">
+                <p>&copy; 2017-2020 La boutique Française<br/>
+                <small>La boutique 100% made in France<br/>
+                <a href="#">Privacy</a> - <a href="#">Terms</a></p></small>
+            </footer>
+        </main>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="{{ asset('js/bootstrap.bundle.js') }}"></script>
+        <script src="{{ asset('js/referer.js') }}"></script>
+    </body>
+    {% block script %}{% endblock %}
+</html>

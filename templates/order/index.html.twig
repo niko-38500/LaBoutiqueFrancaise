@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commande - La boutique Française{% endblock %}
+
+{% block body %}
+{% set total = 0 %}
+{{ form_start(form) }}
+    <div class="order-container">
+        <h1 class="text-left ml-5">Validez vos informations de livraison</h1>
+        <hr>
+        <div class="order-container-grid container">
+            <div class="carrier-order">
+                <h5>MODE DE LIVRAISON</h5>
+                {{ carrier.name }}<br>
+                {{ carrier.description }}<br>
+                <strong>{{ carrier.price == 0 ? 'GRATUIT' : (carrier.price / 100)|number_format(2) ~ " €" }}</strong><br>
+            </div>
+            <div class="address-order">
+                <h5>ADRESSE DE LIVRAISON</h5>
+                <p><a href="{{ path('user_add_address') }}">Ajouté un adresse</a></p>
+                {{ form_row(form.addresses)|replace({"[br]" : "<br/>"})|raw }}
+            </div>
+            <div class="details-order">
+                <div class="product-order">
+                    {% for product in cart %}
+                        {% set total = total + (product.product.price * product.quantity) %}
+                        <div class="products-order-details">
+                            <div class="product-order-img"><img src="/uploads/{{ product.product.illustration }}" alt="{{ product.product.name }}" height="100px"></div>
+                            <div class="product-order-details">{{ product.product.name }} x {{ product.quantity }} <br/> <strong>{{ ((product.product.price * product.quantity) / 100)|number_format(2) }} &euro;</strong></div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="pay-order">
+                <div class="order-total-price text-left">
+                    <h5 class="">TOTAL : {{ ((total + carrier.price) / 100)|number_format(2) }} &euro;</h5>
+                    <small class="">(Frais de port compris)</small>
+                </div>
+                {{ form_row(form.submit) }}
+            </div>
+        </div>
+    </div>
+{{ form_end(form) }}
+<hr class="separator">
+{% endblock %}
+

@@ -1,0 +1,15 @@
+<h1>Achat confirmer</h1>
+<p>
+    Bonjour {{ username }}, le paiement pour la commande n° <strong>{{ reference }}</strong> à bien été effectué. <br> voici un récapitulatif de votre commande :
+</p>
+{% for item in order_details %}
+    {% set img = item.illustration %}
+    {{ item.product }} x {{ item.quantity }} : <strong>{{ (item.price / 100)|number_format(2) }} €</strong><br>
+
+    <img height="150px" src="http://laboutiquefrancaise.fr/uploads/{{ img }}" alt="{{ item.product }}" /> <br><br>
+{% endfor %}
+
+<p>
+    Vous pouvez en suivre l'avancement sur votre compte rubrique "mes commandes"<br>
+    A bientot sur la boutique francaise
+</p>

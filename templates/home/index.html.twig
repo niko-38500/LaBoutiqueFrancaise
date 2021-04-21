@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+
+{% block carousel %}
+
+{% for flash in app.flashes('errorAuthentication') %}
+    <div class="alert alert-danger">{{ flash }}</div>
+{% endfor %}
+
+<ol class="carousel-indicators">
+    {% for key,header in headers %}
+        <li data-target="#myCarousel" data-slide-to="{{key}}" {% if key == 0 %}class="active"{% endif %}></li>
+    {% endfor %}
+</ol>
+<div class="carousel-inner">
+    {% for key,header in headers %}
+        <div class="carousel-item {% if key == 0 %}active{% endif %}" style="background: url('/uploads/{{ header.illustration }}');background-size:cover;">
+            <div class="container">
+                <div class="carousel-caption text-left">
+                    <h1>{{ header.title }}</h1>
+                    <p>{{ header.content }}</p>
+                    <p><a class="btn btn-lg btn-primary" href="{{ header.btnLink }}" role="button">{{ header.btnTitle }}</a></p>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+
+    
+</div>
+<a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+</a>
+<a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+</a>
+{% endblock %}
+
+{% block body %}
+
+<!-- Three columns of text below the carousel -->
+<h2><strong>Produits du moment</strong></h2><br>
+<div class="best-product-container">
+    {% for product in bestProducts %}
+        <div class="best-product-item">
+            <a href="{{ path('product', { 'slug' : product.slug }) }}" class='best-product-link'>
+                <div class="text-center">
+                    <h5>{{ product.name }}</h5>
+                    <img src='/uploads/{{ product.illustration }}' alt="{{ product.name }}" height="150px"><br>
+                    
+                    <span class="best-product-price">{{ (product.price / 100)|number_format(2) }} &euro;</span>    
+                    <span class="best-product-subtitle">{{ product.subtitle }}</span>
+                </div>
+            </a>
+        </div>
+    {% endfor %}
+</div>
+
+
+<!-- START THE FEATURETTES -->
+
+<hr class="featurette-divider">
+
+<div class="row featurette">
+    <div class="col-md-7">
+        <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It’ll blow your mind.</span>
+        </h2>
+        <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod
+            semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus
+            commodo.</p>
+    </div>
+    <div class="col-md-5">
+        <img src="{{ asset('img/first.jpg') }}" class="img-fluid" alt="un savoir faire francais">
+    </div>
+</div>
+
+<hr class="featurette-divider">
+
+<div class="row featurette">
+    <div class="col-md-7 order-md-2">
+        <h2 class="featurette-heading">Oh yeah, it’s that good. <span class="text-muted">See for yourself.</span></h2>
+        <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod
+            semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus
+            commodo.</p>
+    </div>
+    <div class="col-md-5 order-md-1">
+        <img src="{{ asset('img/second.jpg') }}" class="img-fluid" alt="boutique ouverte toute l'année">
+    </div>
+</div>
+
+<hr class="featurette-divider">
+
+<!-- /END THE FEATURETTES -->
+{% endblock %}
